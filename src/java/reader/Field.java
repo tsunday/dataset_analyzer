@@ -5,6 +5,12 @@ public class Field {
     public Type type;
     public String time_regexp;
 
+    public Field(String name, Type type) {
+        this.name = name;
+        this.type = type;
+        time_regexp = null;
+    }
+
     public Field(String name, Type type, String time_regexp) {
         this.name = name;
         this.type = type;
