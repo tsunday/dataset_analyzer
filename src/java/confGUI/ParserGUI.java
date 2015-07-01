@@ -189,9 +189,9 @@ public class ParserGUI extends JFrame {
 					public void actionPerformed(ActionEvent arg0) {
 					
 						if(textField.getText().toString().length()!=0){
-							Field f= new Field(textField.getText(), faceCombo.getSelectedItem().toString());
+							Field f= new Field(textField.getText(), Field.Type.valueOf(faceCombo.getSelectedItem().toString()));
 							listOfFields.add(f);
-							if(faceCombo.getSelectedItem().toString().equals("time")){
+							if(faceCombo.getSelectedItem().toString().equals("Time")){
 								final JDialog d = new JDialog();
 								d.setBounds(500, 500, 200, 150);
 								d.setLayout(null);
@@ -218,18 +218,18 @@ public class ParserGUI extends JFrame {
 							}
 						}
 						if(textField1.getText().toString().length()!=0){
-							Field f= new Field(textField1.getText(), faceCombo1.getSelectedItem().toString());
+							Field f= new Field(textField1.getText(), Field.Type.valueOf(faceCombo1.getSelectedItem().toString()));
 							listOfFields.add(f);
 							System.out.println(listOfFields.size());
 						}
 						if(textField2.getText().toString().length()!=0){
 							
-							Field f= new Field(textField2.getText(), faceCombo2.getSelectedItem().toString());
+							Field f= new Field(textField2.getText(), Field.Type.valueOf(faceCombo2.getSelectedItem().toString()));
 							listOfFields.add(f);
 						}
 						for(int i=iterator; i<listOfFields.size(); i++){
 							
-							list_1.add(listOfFields.get(i).getField().toString() + "     " + listOfFields.get(i).getType().toString());
+							list_1.add(listOfFields.get(i).name + "     " + listOfFields.get(i).type.toString());
 							iterator = listOfFields.size();
 						}
 						
@@ -248,9 +248,9 @@ public class ParserGUI extends JFrame {
 			private JComboBox makeList(int x, int y, int width, int height) {
 				JComboBox faceCombo = new JComboBox();
 			      faceCombo.setEditable(true);
-			      faceCombo.addItem("numeric");
-			      faceCombo.addItem("textual");
-			      faceCombo.addItem("time");
+			      faceCombo.addItem("String");
+			      faceCombo.addItem("Number");
+			      faceCombo.addItem("Time");
 			     
 			      faceCombo.setBounds(x, y, width, height);
 			      return faceCombo;
