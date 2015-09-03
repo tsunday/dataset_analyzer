@@ -11,7 +11,7 @@ import java.util.List;
 
 public class TestReader {
     public static void main(String[] args){
-        Path path = FileSystems.getDefault().getPath("c:\\Users\\Baleron\\Desktop\\Kompilatory\\dataset_analyzer\\src\\java\\test\\test_data", "test.txt");
+        Path path = FileSystems.getDefault().getPath("D:\\Desktop\\Kompilatory\\dataset_analyzer\\src\\java\\test\\test_data\\test.txt");
         String delimiter = ";";
         List<Field> fields = new ArrayList<>();
         Field f1 = new Field("f1", Field.Type.Number);

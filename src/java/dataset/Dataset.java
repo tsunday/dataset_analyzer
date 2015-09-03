@@ -3,6 +3,7 @@ package dataset;
 import java.util.*;
 
 public class Dataset {
+    // list of dataset rows(key-value sublists)
     List<HashMap<String, Object>> dataset;
 
     public Dataset() {
