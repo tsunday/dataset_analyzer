@@ -1,3 +1,6 @@
+/*
+Author: Tomasz Niedziela-Brach
+ */
 package dataset;
 
 import java.util.HashMap;
@@ -6,9 +9,8 @@ public class SingleEventExpression extends EventExpression{
     private Event event;
     private Operator operator;
 
-    public SingleEventExpression(Event event, Operator operator) {
+    public SingleEventExpression(Event event) {
         this.event = event;
-        this.operator = operator;
     }
 
     public Operator getOperator() {
@@ -28,8 +30,9 @@ public class SingleEventExpression extends EventExpression{
         // IMPLEMENT
         if(row.size() < event.occurances.size())
             throw new ArrayIndexOutOfBoundsException("Wrong expression");
-        event.VerifyRow(row);
+        if(event.VerifyRow(row)){
 
+        }
         return false;
     }
 

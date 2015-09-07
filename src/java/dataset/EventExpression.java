@@ -1,3 +1,6 @@
+/*
+Author: Tomasz Niedziela-Brach
+ */
 package dataset;
 
 import java.util.HashMap;
@@ -17,6 +20,8 @@ public abstract class EventExpression {
     public State getState() {
         return state;
     }
+
+    public void setState(State state){ this.state = state; }
 
     public abstract boolean MatchExpression(HashMap<String, Object> row) throws ArrayIndexOutOfBoundsException;
 

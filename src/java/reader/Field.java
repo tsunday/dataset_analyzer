@@ -1,3 +1,6 @@
+/*
+Author: Tomasz Niedziela-Brach
+ */
 package reader;
 
 public class Field {

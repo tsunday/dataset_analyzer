@@ -1,8 +1,11 @@
+/*
+Author: Tomasz Niedziela-Brach
+ */
 package dataset;
 
-/**
- * Created by Tolina on 03.09.2015.
- */
+import java.util.HashMap;
+
+
 public class DatasetFilter {
     private EventExpression eventExpression;
 
@@ -21,7 +24,11 @@ public class DatasetFilter {
     // filters given Dataset using set EventExpression and returns matching data only
     public Dataset FilterDataset(Dataset dataset)
     {
-
-        return dataset;
+        Dataset result = new Dataset();
+        for(HashMap<String, Object> row : dataset.dataset){
+            if(this.eventExpression.MatchExpression(row))
+                result.addRow(row);
+        }
+        return result;
     }
 }
