@@ -45,7 +45,7 @@ public class Occurance {
 
     public boolean CheckValue(String value)
     {
-        if(this.condition == Condition.Equal && value == (String)this.value)
+        if(this.condition == Condition.Equal && value.equals((String)this.value))
             return true;
         return false;
     }

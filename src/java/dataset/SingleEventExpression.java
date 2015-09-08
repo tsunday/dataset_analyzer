@@ -31,7 +31,7 @@ public class SingleEventExpression extends EventExpression{
         if(row.size() < event.occurances.size())
             throw new ArrayIndexOutOfBoundsException("Wrong expression");
         if(event.VerifyRow(row)){
-
+            return true;
         }
         return false;
     }
