@@ -21,6 +21,16 @@ public class DoubleEventExpression extends EventExpression{
     }
 
     @Override
+    protected void UpdateState(boolean rowMatched) {
+
+    }
+
+    @Override
+    public boolean VerifyOperator() {
+        return false;
+    }
+
+    @Override
     public String toString() {
         // IMPLEMENT
         return null;

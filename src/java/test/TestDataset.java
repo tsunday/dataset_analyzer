@@ -40,8 +40,11 @@ public class TestDataset {
         eventA.addOccurance("f2", o2);
 
         // Filter data
-        DatasetFilter filter = new DatasetFilter(new SingleEventExpression(eventA));
+        SingleEventExpression.Operator op1 = SingleEventExpression.Operator.Invariance;
+        SingleEventExpression ex1 = new SingleEventExpression(eventA, op1);
+        DatasetFilter filter = new DatasetFilter(ex1);
         Dataset result = filter.FilterDataset(dataset);
         System.out.println(result.toString());
+        System.out.println("Result of matching logical operator: " + ex1.VerifyOperator());
     }
 }

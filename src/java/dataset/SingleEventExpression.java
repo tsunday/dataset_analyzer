@@ -4,25 +4,53 @@ Author: Tomasz Niedziela-Brach
 package dataset;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 
 public class SingleEventExpression extends EventExpression{
     private Event event;
     private Operator operator;
+    private LinkedList<State> expectedState;
 
-    public SingleEventExpression(Event event) {
+    public SingleEventExpression(Event event, Operator operator) {
         this.event = event;
+        this.operator = operator;
+        setState(State.None);
+        this.expectedState = new LinkedList<State>();
+        switch(operator){
+            case Absence:
+                expectedState.push(State.NotFound);
+                break;
+            case Invariance:
+                expectedState.push(State.Found);
+                break;
+            case Existence:
+                expectedState.push(State.Found);
+                expectedState.push(State.NotFound);
+                expectedState.push(State.FoundInterrupted);
+                expectedState.push(State.NotFoundInterrupted);
+                break;
+            case Autoresponsiveness:
+                expectedState.push(State.FoundInterrupted);
+                expectedState.push(State.NotFoundInterrupted);
+                break;
+            case Persistence:
+                expectedState.push(State.NotFoundInterrupted);
+                break;
+            default:
+                break;
+        }
     }
 
-    public Operator getOperator() {
-        return operator;
+    public Event getEvent() {
+        return event;
     }
 
     public void setOperator(Operator operator) {
         this.operator = operator;
     }
 
-    public Event getEvent() {
-        return event;
+    public Operator getOperator() {
+        return operator;
     }
 
     @Override
@@ -30,9 +58,52 @@ public class SingleEventExpression extends EventExpression{
         // IMPLEMENT
         if(row.size() < event.occurances.size())
             throw new ArrayIndexOutOfBoundsException("Wrong expression");
-        if(event.VerifyRow(row)){
+        if(event.VerifyRow(row)) {
+            UpdateState(true);
             return true;
         }
+        UpdateState(false);
+        return false;
+    }
+
+    @Override
+    protected void UpdateState(boolean rowMatched){
+        if(rowMatched){
+            switch(getState()) {
+                case None:
+                    setState(State.Found);
+                    break;
+                case NotFound:
+                    setState(State.NotFoundInterrupted);
+                    break;
+                case FoundInterrupted:
+                    setState(State.NotFoundInterrupted);
+                    break;
+                default:
+                    break;
+            }
+        }
+        else{
+            switch(getState()) {
+                case None:
+                    setState(State.NotFound);
+                    break;
+                case Found:
+                    setState(State.FoundInterrupted);
+                    break;
+                case NotFoundInterrupted:
+                    setState(State.FoundInterrupted);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    @Override
+    public boolean VerifyOperator(){
+        if(expectedState.contains(getState()))
+            return true;
         return false;
     }
 
@@ -40,5 +111,13 @@ public class SingleEventExpression extends EventExpression{
     public String toString() {
         // IMPLEMENT
         return null;
+    }
+
+    public enum Operator{
+        Absence,
+        Invariance,
+        Existence,
+        Autoresponsiveness,
+        Persistence,
     }
 }

@@ -6,16 +6,7 @@ package dataset;
 import java.util.HashMap;
 
 public abstract class EventExpression {
-    private boolean negative;
     private State state;
-
-    public boolean isNegative() {
-        return negative;
-    }
-
-    public void setNegative(boolean negative) {
-        this.negative = negative;
-    }
 
     public State getState() {
         return state;
@@ -25,16 +16,15 @@ public abstract class EventExpression {
 
     public abstract boolean MatchExpression(HashMap<String, Object> row) throws ArrayIndexOutOfBoundsException;
 
+    protected abstract void UpdateState(boolean rowMatched);
+
+    public abstract boolean VerifyOperator();
+
     public enum State{
+        None,
         NotFound,
         Found,
-        FoundInterrupted
-    }
-
-    public enum Operator{
-        Absence,
-        Existence,
-        Autoresponsiveness,
-        Persistence,
+        FoundInterrupted,
+        NotFoundInterrupted
     }
 }
