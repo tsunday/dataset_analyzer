@@ -2,10 +2,13 @@ package test;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -15,15 +18,19 @@ import confGUI.Configuration;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import dataset.Dataset;
+import dataset.DatasetFilter;
 import dataset.Event;
 import dataset.Occurance;
 import dataset.Occurance.Condition;
+import dataset.SingleEventExpression;
 
 public class EventDefineUI extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
 	Configuration c;
+	Dataset d;
 
 	private List<JTextField> textFields = new ArrayList<JTextField>();
 
@@ -35,7 +42,7 @@ public class EventDefineUI extends JFrame {
 			public void run() {
 				try {
 					
-					EventDefineUI frame = new EventDefineUI(new Configuration());
+					EventDefineUI frame = new EventDefineUI(new Configuration(), new Dataset());
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -57,26 +64,45 @@ public class EventDefineUI extends JFrame {
 		
 	
 	}
-	public EventDefineUI(Configuration c){
+	public EventDefineUI(Configuration c, final Dataset d){
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		for(int i=0; i<7/*c.getNamesOfFileds().size()*/; i++){
-			JLabel lblNewLabel = new JLabel("CHUJ"/*c.getNamesOfFileds().get(i).name*/);
-			lblNewLabel.setBounds(42, 11 + (40*i), 46, 14);
+		JLabel lblInstruction = new JLabel("Podaj zakres kolumn hbhbh");
+		lblInstruction.setBounds(10, 10, 250, 20);
+		contentPane.add(lblInstruction);
+		
+		for(int i=0; i<c.getNamesOfFileds().size(); i++){
+			JLabel lblNewLabel = new JLabel(c.getNamesOfFileds().get(i).name);
+			lblNewLabel.setBounds(42, 71 + (40*i), 46, 14);
 			contentPane.add(lblNewLabel);
 			
 			textField = new JTextField();
-			textField.setBounds(162, 8+(39*i), 86, 20);
+			textField.setBounds(162, 67+(39*i), 86, 20);
 			contentPane.add(textField);
 			textField.setColumns(10);
 			
 			textFields.add(textField);
 			
 		}
+		
+		JButton ok = new JButton("GO!");
+		ok.setText("GO!");
+		ok.setBounds(100, 200, 60,40);
+		contentPane.add(ok);
+		ok.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Event eventA = createEvent();
+				DatasetFilter filter = new DatasetFilter(new SingleEventExpression(eventA));  
+		        Dataset result = filter.FilterDataset(d);
+		        System.out.println(result.toString());
+				
+			}
+		});
 		
 	}
 	
@@ -118,9 +144,10 @@ public class EventDefineUI extends JFrame {
 			}
 			
 			
-		if(range==null)
+		if(range==null){
+			System.out.println(con+ "  "+value);
 		occurances.put(this.c.getNamesOfFileds().get(i).name, new Occurance(con, value));
-		else if(range!=null)
+		}else if(range!=null)
 			occurances.put(this.c.getNamesOfFileds().get(i).name, new Occurance(con, value,range));
 		
 		}

@@ -35,6 +35,7 @@ public class TestDataset {
         String weather = "pada";
         Occurance o1 = new Occurance(Occurance.Condition.More, limit);
         Occurance o2 = new Occurance(Occurance.Condition.Equal, weather);
+        
         Event eventA = new Event();
         eventA.addOccurance("f1", o1);
         eventA.addOccurance("f2", o2);

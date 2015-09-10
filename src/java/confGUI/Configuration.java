@@ -3,6 +3,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import reader.Field;
+
 
 public class Configuration {
 	String separator;

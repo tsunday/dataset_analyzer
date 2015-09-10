@@ -7,7 +7,7 @@ import java.util.*;
 
 public class Dataset {
     // list of dataset rows(key-value sublists)
-    List<HashMap<String, Object>> dataset;
+    public List<HashMap<String, Object>> dataset;
 
     public Dataset() {
         dataset = new ArrayList<>();
