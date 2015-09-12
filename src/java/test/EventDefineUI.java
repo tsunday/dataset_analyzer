@@ -97,7 +97,8 @@ public class EventDefineUI extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				Event eventA = createEvent();
-				DatasetFilter filter = new DatasetFilter(new SingleEventExpression(eventA));  
+				SingleEventExpression.Operator op1 = SingleEventExpression.Operator.Invariance;
+				DatasetFilter filter = new DatasetFilter(new SingleEventExpression(eventA,op1));  
 		        Dataset result = filter.FilterDataset(d);
 		        System.out.println(result.toString());
 				
