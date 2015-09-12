@@ -65,6 +65,10 @@ public class EventDefineUI extends JFrame {
 	
 	}
 	public EventDefineUI(Configuration c, final Dataset d){
+		this.c=c;
+		for(int i=0; i<c.getNamesOfFileds().size();i++)
+			System.out.println(c.getNamesOfFileds().get(i).name);
+		System.out.println(c.getNamesOfFileds().toString());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -117,11 +121,11 @@ public class EventDefineUI extends JFrame {
 			String firstSign = text.substring(0, 0);
 			switch(firstSign){
 			
-			case(">"):con=con.More;
+			case(">"):con=Condition.More;
 			value=text.substring(1, text.length());
 			break;
 			
-			case("<"):con=con.Less;
+			case("<"):con=Condition.Less;
 			value=text.substring(1, text.length());
 			break;
 			
@@ -130,29 +134,28 @@ public class EventDefineUI extends JFrame {
 			if(isNumeric(firstSign)){
 				
 				if(text.contains("<")){
-				con=con.InRange;
+				con=Condition.InRange;
 				value=text.substring(0, text.indexOf("<"));
 				range=text.substring(text.indexOf("<"), text.length());
 						
 				}else if(text.contains(">")){
-					con=con.InRange;
+					con=Condition.InRange;
 					value=text.substring(0, text.indexOf(">"));
 					range=text.substring(text.indexOf(">"), text.length());
 				}else{
-					con=con.Equal;
+					con=Condition.Equal;
 					value=text;
 				}
-			}
+			}else{
 			
 			
-		if(range==null){
+			con=Condition.Equal;	
 			System.out.println(con+ "  "+value);
+			System.out.println(this.c.getNamesOfFileds().get(i).name);   //TU LECI NULL
 		occurances.put(this.c.getNamesOfFileds().get(i).name, new Occurance(con, value));
-		}else if(range!=null)
-			occurances.put(this.c.getNamesOfFileds().get(i).name, new Occurance(con, value,range));
 		
 		}
-		
+		}
 		return new Event(occurances);
 		
 	}
