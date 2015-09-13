@@ -9,6 +9,7 @@ import java.util.LinkedList;
 public class SingleEventExpression extends EventExpression{
     private Event event;
     private Operator operator;
+    private State state;
     private LinkedList<State> expectedState;
 
     public SingleEventExpression(Event event, Operator operator) {
@@ -25,7 +26,6 @@ public class SingleEventExpression extends EventExpression{
                 break;
             case Existence:
                 expectedState.push(State.Found);
-                expectedState.push(State.NotFound);
                 expectedState.push(State.FoundInterrupted);
                 expectedState.push(State.NotFoundInterrupted);
                 break;
@@ -37,7 +37,7 @@ public class SingleEventExpression extends EventExpression{
                 expectedState.push(State.NotFoundInterrupted);
                 break;
             default:
-                break;
+                throw new IllegalArgumentException("Operator not known: " + operator.toString());
         }
     }
 
@@ -53,6 +53,12 @@ public class SingleEventExpression extends EventExpression{
         return operator;
     }
 
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state){ this.state = state; }
+
     @Override
     public boolean MatchExpression(HashMap<String, Object> row) throws ArrayIndexOutOfBoundsException{
         // IMPLEMENT
@@ -66,7 +72,6 @@ public class SingleEventExpression extends EventExpression{
         return false;
     }
 
-    @Override
     protected void UpdateState(boolean rowMatched){
         if(rowMatched){
             switch(getState()) {
