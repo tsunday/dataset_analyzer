@@ -118,25 +118,43 @@ public class EventDefineUI extends JFrame {
 		}
 		
 		JLabel lblLogic = new JLabel("Wybierz wyra¿enie logiczne które chcesz znaleŸæ:");
-		lblLogic.setBounds(90, 200, 350, 20);
+		lblLogic.setBounds(85, 200, 350, 20);
 		contentPane.add(lblLogic);
 		
 		
 		JRadioButton rbAbsence = new JRadioButton("Absencja");
-		rbAbsence.setBounds(100, 220, 150, 30);
+		rbAbsence.setBounds(20, 220, 150, 30);
 		contentPane.add(rbAbsence);
 		
 		JRadioButton rbInvariance = new JRadioButton("Niezmiennoœæ");
-		rbInvariance.setBounds(100, 250, 150, 30);
+		rbInvariance.setBounds(20, 250, 150, 30);
 		contentPane.add(rbInvariance);
 		
 		JRadioButton rbExistence = new JRadioButton("Mo¿liwoœæ");
-		rbExistence.setBounds(100, 280, 150, 30);
+		rbExistence.setBounds(20, 280, 150, 30);
 		contentPane.add(rbExistence);
 		
 		JRadioButton rbResponsiveTwo = new JRadioButton("Responsywnoœæ 2 zdarzeñ");
-		rbResponsiveTwo.setBounds(100, 310, 190, 30);
+		rbResponsiveTwo.setBounds(20, 310, 190, 30);
 		contentPane.add(rbResponsiveTwo);
+		
+		
+		
+		JRadioButton rbObligation = new JRadioButton("Obligacja ");
+		rbObligation.setBounds(200, 220, 150, 30);
+		contentPane.add(rbObligation);
+		
+		JRadioButton rbAutoresponsive = new JRadioButton("Autoresponsywnoœæ");
+		rbAutoresponsive.setBounds(200, 250, 150, 30);
+		contentPane.add(rbAutoresponsive);
+		
+		JRadioButton rbLong = new JRadioButton("Trwa³oœæ");
+		rbLong.setBounds(200, 280, 150, 30);
+		contentPane.add(rbLong);
+		
+		JRadioButton rbReaktive= new JRadioButton("Reaktywnoœæ");
+		rbReaktive.setBounds(200, 310, 190, 30);
+		contentPane.add(rbReaktive);
 		
 		
 		
