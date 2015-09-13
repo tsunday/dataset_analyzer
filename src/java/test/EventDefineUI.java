@@ -11,6 +11,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.border.EmptyBorder;
 
 import confGUI.Configuration;
@@ -116,9 +117,27 @@ public class EventDefineUI extends JFrame {
 			
 		}
 		
-		JLabel lblLogic = new JLabel("Wybierz wyra¿enie logiczne które chcesz znaleŸæ");
-		lblLogic.setBounds(120, 200, 350, 20);
+		JLabel lblLogic = new JLabel("Wybierz wyra¿enie logiczne które chcesz znaleŸæ:");
+		lblLogic.setBounds(90, 200, 350, 20);
 		contentPane.add(lblLogic);
+		
+		
+		JRadioButton rbAbsence = new JRadioButton("Absencja");
+		rbAbsence.setBounds(100, 220, 150, 30);
+		contentPane.add(rbAbsence);
+		
+		JRadioButton rbInvariance = new JRadioButton("Niezmiennoœæ");
+		rbInvariance.setBounds(100, 250, 150, 30);
+		contentPane.add(rbInvariance);
+		
+		JRadioButton rbExistence = new JRadioButton("Mo¿liwoœæ");
+		rbExistence.setBounds(100, 280, 150, 30);
+		contentPane.add(rbExistence);
+		
+		JRadioButton rbResponsiveTwo = new JRadioButton("Responsywnoœæ 2 zdarzeñ");
+		rbResponsiveTwo.setBounds(100, 310, 190, 30);
+		contentPane.add(rbResponsiveTwo);
+		
 		
 		
 		JButton ok = new JButton("GO!");

@@ -83,7 +83,7 @@ public class ParserGUI extends JFrame {
 		
 
 		txtPath = new JTextField();
-	/*	txtPath.setText("C:\\Users\\Mateusz\\Documents\\dataset_analyzer\\src\\java\\test\\test_data\\test.txt");*/
+		txtPath.setText("C:\\Users\\Mateusz\\Documents\\dataset_analyzer\\src\\java\\test\\test_data\\test.txt");
 		txtPath.setBounds(20, 107, 200, 24);
 	
 		
