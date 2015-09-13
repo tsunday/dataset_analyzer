@@ -81,6 +81,15 @@ public class ParserGUI extends JFrame {
 		textField.setText(";");
 		textField.setColumns(10);
 		
+
+		txtPath = new JTextField();
+	/*	txtPath.setText("C:\\Users\\Mateusz\\Documents\\dataset_analyzer\\src\\java\\test\\test_data\\test.txt");*/
+		txtPath.setBounds(20, 107, 200, 24);
+	
+		
+		getContentPane().add(txtPath);
+		txtPath.setColumns(10);
+		
 		JButton btnNewButton = new JButton("File");
 		btnNewButton.setBounds(46, 142, 89, 23);
 		btnNewButton.addActionListener(new ActionListener() {
@@ -107,13 +116,6 @@ public class ParserGUI extends JFrame {
 		getContentPane().add(list_1);
 		
 		
-		txtPath = new JTextField();
-		txtPath.setText("C:\\Users\\Mateusz\\Documents\\dataset_analyzer\\src\\java\\test\\test_data\\test.txt");
-		txtPath.setBounds(20, 107, 200, 24);
-	
-		
-		getContentPane().add(txtPath);
-		txtPath.setColumns(10);
 		
 		JButton btnNewButton_1 = new JButton("add new Field");
 		btnNewButton_1.setBounds(262, 142, 124, 23);
