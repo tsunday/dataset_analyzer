@@ -82,10 +82,10 @@ public class ParserGUI extends JFrame {
 		textField.setColumns(10);
 		
 
-		txtPath = new JTextField();
+		/*txtPath = new JTextField();
 		txtPath.setText("C:\\Users\\Mateusz\\Documents\\dataset_analyzer\\src\\java\\test\\test_data\\test.txt");
 		txtPath.setBounds(20, 107, 200, 24);
-	
+	*/
 		
 		getContentPane().add(txtPath);
 		txtPath.setColumns(10);
