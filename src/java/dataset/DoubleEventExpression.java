@@ -10,8 +10,8 @@ public class DoubleEventExpression extends EventExpression{
     private Operator operator;
     private Event event1;
     private Event event2;
-    private State state1;
-    private State state2;
+    private State state1 = State.None;
+    private State state2 = State.None;
     private LinkedList<State> expectedState1;
     private LinkedList<State> expectedState2;
 
@@ -19,6 +19,8 @@ public class DoubleEventExpression extends EventExpression{
         this.event1 = event1;
         this.event2 = event2;
         this.operator = operator;
+        this.expectedState1 = new LinkedList<State>();
+        this.expectedState2 = new LinkedList<State>();
 
         switch(operator) {
             case Obligation:
@@ -56,7 +58,7 @@ public class DoubleEventExpression extends EventExpression{
         if(row.size() < event1.occurances.size() || row.size() < event2.occurances.size())
             throw new ArrayIndexOutOfBoundsException("Wrong expression");
         boolean matchResult1 = event1.VerifyRow(row);
-        boolean matchResult2 = event1.VerifyRow(row);
+        boolean matchResult2 = event2.VerifyRow(row);
         UpdateState(matchResult1, matchResult2);
         if(matchResult1 || matchResult2)
             return true;
