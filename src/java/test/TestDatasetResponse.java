@@ -14,7 +14,7 @@ import java.util.List;
 
 public class TestDatasetResponse {
     public static void main(String[] args){
-        Path path = FileSystems.getDefault().getPath("D:\\Desktop\\Kompilatory\\dataset_analyzer\\src\\java\\test\\test_data\\test_response.txt");
+        Path path = FileSystems.getDefault().getPath("C:\\Users\\Mateusz\\Documents\\dataset_analyzer\\src\\java\\test\\test_data\\test_response.txt");
         String delimiter = ",";
         List<Field> fields = new ArrayList<>();
         Field f1 = new Field("f1", Field.Type.Number);
