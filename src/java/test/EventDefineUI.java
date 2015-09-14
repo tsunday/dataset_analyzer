@@ -4,7 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -32,6 +35,10 @@ public class EventDefineUI extends JFrame {
 	private JTextField textField, textFieldB;
 	Configuration c;
 	Dataset d;
+	SimpleDateFormat sdf;
+	double dblValue;
+	String sValue;
+	Date dValue;
 
 	private List<JTextField> textFields = new ArrayList<JTextField>();
 	private List<JTextField> textFieldsB = new ArrayList<JTextField>();
@@ -68,6 +75,7 @@ public class EventDefineUI extends JFrame {
 	}
 	public EventDefineUI(Configuration c, final Dataset d){
 		this.c=c;
+		
 		for(int i=0; i<c.getNamesOfFileds().size();i++)
 			System.out.println(c.getNamesOfFileds().get(i).name);
 		System.out.println(c.getNamesOfFileds().toString());
@@ -166,7 +174,13 @@ public class EventDefineUI extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				boolean twoEventFlag=false;
-				Event eventA = createEvent(textFields);
+				Event eventA = null;
+				try {
+					eventA = createEvent(textFields);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 				
 				Event eventB=null;
@@ -178,7 +192,12 @@ public class EventDefineUI extends JFrame {
 						
 				}
 				if(twoEventFlag){
-				 eventB = createEvent(textFieldsB);
+				 try {
+					eventB = createEvent(textFieldsB);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				System.out.println("Stworzony EventB");
 				/*for(int i=0; i<eventB.occurances.size(); i++)
 					System.out.println(eventB.occurances.get(i).condition + "     " + eventB.occurances.get(i).value);
@@ -194,13 +213,15 @@ public class EventDefineUI extends JFrame {
 		
 	}
 	
-	public Event createEvent(List<JTextField> tL){
+	public Event createEvent(List<JTextField> tL) throws ParseException{
 	 List<JTextField> tmpList = tL;
+	 Condition con=null;
+		Object value = null;
+		Object range=null;
 		HashMap<String, Occurance> occurances = new HashMap<String, Occurance>();
 		for(int i=0; i<tmpList.size(); i++){
-			Condition con=null;
-			Object value = null;
-			Object range=null;
+			
+		
 			String text = tmpList.get(i).getText();
 			String firstSign = text.substring(0, 1);
 			switch(firstSign){
@@ -231,6 +252,18 @@ public class EventDefineUI extends JFrame {
 					value=text;
 				}
 				
+				if(c.getNamesOfFileds().get(i).type.equals(reader.Field.Type.Time)){
+					System.out.println(c.getNamesOfFileds().get(i).type);
+					 sdf = new SimpleDateFormat("HH:mm:ss");
+					 dValue = sdf.parse("12:21:23");
+					 
+					 
+					
+				}else if (c.getNamesOfFileds().get(i).type.equals(reader.Field.Type.Number)){
+					value = new Double((double) value);
+					
+				}
+				
 				System.out.println("TEEEERAZ:   " + con+ "  "+value);
 				System.out.println(this.c.getNamesOfFileds().get(i).name); 
 				occurances.put(this.c.getNamesOfFileds().get(i).name, new Occurance(con, value,range));
@@ -240,6 +273,17 @@ public class EventDefineUI extends JFrame {
 			con=Condition.Equal;	
 			System.out.println("ABO TU " +con+ "  "+value);
 			System.out.println(this.c.getNamesOfFileds().get(i).name);   //TU LECI NULL
+			
+			if(c.getNamesOfFileds().get(i).type.equals(reader.Field.Type.Time)){
+				System.out.println(c.getNamesOfFileds().get(i).type);
+				 sdf = new SimpleDateFormat("HH:mm:ss");
+				 dValue = sdf.parse("12:21:23");
+				 
+				 
+				
+			}
+			
+			
 		occurances.put(this.c.getNamesOfFileds().get(i).name, new Occurance(con, value));
 		
 		}
